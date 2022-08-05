@@ -1,12 +1,23 @@
 def main():
     print("[1]: jogador1 vs jogador2")
     print("[2]: jogador vs computador")
-    print("Escolha o modo do jogo:")
-    modoDeJogo = int(input())
-    n = int(input("Entre com o numero de pecas:"))
+    modoDeJogo = int(input("Escolha o modo do jogo: "))
+    while (modoDeJogo != 1 and modoDeJogo != 2):
+        print("Modo inválido.")
+        print("[1]: jogador1 vs jogador2")
+        print("[2]: jogador vs computador")
+        modoDeJogo = int(input("Escolha o modo do jogo: "))
+
+    n = int(input("Entre com o numero de pecas (n): "))
+    while (n < 1):
+        print("O numero de pecas deve ser um numero inteiro.")
+        n = int(input("Entre com o numero de pecas (n): "))
     print()
-    print("Entre com o numero maximo de pecas que podem ser retiradas:")
-    m = int(input())
+
+    m = int(input(f"Entre com o numero maximo de pecas que podem ser retiradas (m) (obs: 1 <= m <= {n}): "))
+    while (m < 1 or m > n):
+        print(f"Escolha inválida, o número maximo de pecas que podem ser retiradas deve estar no intervalo [1;{n}]")
+        m = int(input(f"Entre com o numero maximo de pecas que podem ser retiradas (m) (obs: 1 <= m <= {n}): "))
     print("*****")
 
     turno = 1
@@ -20,8 +31,12 @@ def main():
                 print("Jogador: 1")
             else:
                 print("Jogador: 2")
-            print("Quantas pecas voce gostaria de retirar?:")
-            pecasRetiradas = int(input())
+            pecasRetiradas = int(input("Quantas pecas voce gostaria de retirar? "))
+            
+            while (pecasRetiradas < 1 or pecasRetiradas > m):
+                print(f"Número inválido de peças! Você deve escolher um número do intervalo [1;{m}]")
+                pecasRetiradas = int(input("Quantas pecas voce gostaria de retirar? "))
+
             print("Jogador retirou", pecasRetiradas, "peca(s)")
             nPecas = nPecas - pecasRetiradas
             print("Numero de pecas restantes =", nPecas)
@@ -39,8 +54,12 @@ def main():
         if (n%(m+1) == 0): #computador "convida" jogador a comecar
             while (not fimDeJogo):
                 print("Turno:", turno)
-                print("Quantas pecas voce gostaria de retirar?:")
-                pecasRetiradas = int(input())
+                pecasRetiradas = int(input("Quantas pecas voce gostaria de retirar? "))
+
+                while (pecasRetiradas < 1 or pecasRetiradas > m):
+                    print(f"Número inválido de peças! Você deve escolher um número do intervalo [1;{m}]")
+                    pecasRetiradas = int(input("Quantas pecas voce gostaria de retirar? "))
+
                 print("Jogador retirou", pecasRetiradas, "peca(s)")
                 nPecas = nPecas - pecasRetiradas
                 print("Numero de pecas restantes =", nPecas)
@@ -84,8 +103,7 @@ def main():
                 print("Que pena! Voce perdeu!")
             while (not fimDeJogo):
                 print("Turno:", turno)
-                print("Quantas pecas voce gostaria de retirar?:")
-                pecasRetiradas = int(input())
+                pecasRetiradas = int(input("Quantas pecas voce gostaria de retirar? "))
                 print("Jogador retirou", pecasRetiradas, "peca(s)")
                 nPecas = nPecas - pecasRetiradas
                 print("Numero de pecas restantes =", nPecas)
